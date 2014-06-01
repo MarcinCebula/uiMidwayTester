@@ -48,7 +48,7 @@ describe('ngMidwayTester', function() {
         .config(function($routeProvider) {
           $routeProvider.when('/path2', {
             controller: function($scope) {
-              $scope.page = 'two'; 
+              $scope.page = 'two';
             },
             template : 'two'
           });
@@ -76,7 +76,7 @@ describe('ngMidwayTester', function() {
         .config(function($routeProvider) {
           $routeProvider.when('/path-10', {
             controller: function($scope) {
-              $scope.page = 'ten'; 
+              $scope.page = 'ten';
             },
             template : 'ten'
           });
@@ -106,7 +106,7 @@ describe('ngMidwayTester', function() {
         .config(function($routeProvider) {
           $routeProvider.when('/path-10', {
             controller: function($scope) {
-              $scope.page = 'ten'; 
+              $scope.page = 'ten';
             },
             template : 'ten'
           });
@@ -172,13 +172,13 @@ describe('ngMidwayTester', function() {
         .config(function($routeProvider) {
           $routeProvider.when('/path', {
             controller: function($scope) {
-              $scope.page = 'one'; 
+              $scope.page = 'one';
             },
             template : '...'
           });
           $routeProvider.when('/path2', {
             controller: function($scope) {
-              $scope.page = 'two'; 
+              $scope.page = 'two';
             },
             template : '==='
           });

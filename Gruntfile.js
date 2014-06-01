@@ -55,23 +55,23 @@ module.exports = function(grunt) {
 
     karma: {
       test: {
-        configFile: './test/karma.conf.js',
+        configFile: './karma.conf.js',
         autoWatch: false,
         singleRun: true
       },
       auto: {
-        configFile: './test/karma.conf.js',
+        configFile: './karma.conf.js',
         autoWatch: true,
         singleRun: false
       },
       ci: {
-        configFile: './test/karma.conf.js',
+        configFile: './karma.conf.js',
         browsers: ['PhantomJS'],
         autoWatch: false,
         singleRun: true
       },
       coverage: {
-        configFile: './test/karma.conf.js',
+        configFile: './karma.conf.js',
         autoWatch: false,
         singleRun: true,
         reporters: ['progress', 'coverage'],

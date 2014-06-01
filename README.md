@@ -1,6 +1,7 @@
-# ngMidwayTester [![Build Status](https://travis-ci.org/yearofmoo/ngMidwayTester.png?branch=master)](https://travis-ci.org/yearofmoo/ngMidwayTester)
+# Converting ng-midway-tester to ui-midway-tester.
+## ui-midway-tester uses angular-ui/ui-router
 
-A pure-javascript integration tester for AngularJS that can be run inline with application code.  
+A pure-javascript integration tester for AngularJS that can be run inline with application code.
 
 ## Installation
 
@@ -67,7 +68,7 @@ describe('my test spec', function() {
 The benefit to using the midway tester is that it will act like an AngularJS application and work around asset mocking.
 This means that if your code contains a remote XHR call to an asset file then the midway tester will download it just as normal.
 However, due to the mechanics of Karma, you'll need to assign a **proxy** which assigns the root path to point to a server
-hosting your website. 
+hosting your website.
 
 In your Karma settings, it should look something like this:
 
