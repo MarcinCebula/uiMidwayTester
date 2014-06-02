@@ -1,6 +1,6 @@
 /**
- * Creates an instance of the midway tester on the specified module. 
- * 
+ * Creates an instance of the midway tester on the specified module.
+ *
  * @class ngMidwayTester
  * @constructor
  * @param moduleName the AngularJS module that you wish to test
@@ -27,7 +27,7 @@
       $terminalElement,
       $viewCounter = 0;
 
-  var viewSelector = 'ng-view, [ng-view], .ng-view, [x-ng-view], [data-ng-view]';
+  var viewSelector = 'ui-view, [ui-view], .ui-view, [x-ui-view], [data-ui-view]';
 
   var midwayModule = angular.module('ngMidway', []);
 
@@ -62,13 +62,14 @@
     options.template = request.responseText;
   }
 
+  debugger;
   if(options.template) {
     $rootElement.html(options.template);
     var view = angular.element($rootElement[0].querySelector(viewSelector));
     $viewContainer = view.parent();
   }
   else {
-    $viewContainer = angular.element('<div><div ng-view></div></div>');
+    $viewContainer = angular.element('<div><div ui-view></div></div>');
     $rootElement.append($viewContainer);
   }
 
@@ -126,7 +127,7 @@
 
     /**
      * @method viewElement
-     * @return {Element} The current element that has ng-view attached to it
+     * @return {Element} The current element that has ui-view attached to it
      */
     viewElement : function() {
       return angular.element($viewContainer[0].querySelector(viewSelector));
@@ -232,7 +233,7 @@
      * Keeps checking an expression until it returns a truthy value and then runs the provided callback
      *
      * @param {function} exp The given function to poll
-     * @param {function} callback The given callback to fire once the exp function returns a truthy value 
+     * @param {function} callback The given callback to fire once the exp function returns a truthy value
      * @method until
      */
     until : function(exp, callback) {
@@ -242,7 +243,7 @@
           clearTimeout(timer);
           callback();
         }
-      }, delay); 
+      }, delay);
       $timers.push(timer);
     },
 

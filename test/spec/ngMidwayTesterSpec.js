@@ -1,4 +1,4 @@
-describe('ngMidwayTester', function() {
+describe('uiMidwayTester', function() {
 
   var tester,
       noop = angular.noop,
@@ -13,10 +13,9 @@ describe('ngMidwayTester', function() {
 
   it('should register a module', function() {
     var example = angular.module(appName, [])
-      .run(function($rootScope) {
-        $rootScope.value = 'true';
-      });
-
+          .run(function($rootScope) {
+            $rootScope.value = 'true';
+          });
     tester = ngMidwayTester(appName);
     expect(tester.module()).to.equal(example);
     expect(tester.rootScope().value).to.equal('true');
@@ -25,12 +24,12 @@ describe('ngMidwayTester', function() {
   it('should inject services', function() {
     var $location, $window, $compile, $injector;
     var example = angular.module(appName, [])
-      .run(function(_$compile_, _$window_, _$location_, _$injector_) {
-        $location = _$location_;
-        $window = _$window_;
-        $compile = _$compile_;
-        $injector = _$injector_;
-      });
+          .run(function(_$compile_, _$window_, _$location_, _$injector_) {
+            $location = _$location_;
+            $window = _$window_;
+            $compile = _$compile_;
+            $injector = _$injector_;
+          });
 
     tester = ngMidwayTester(appName);
     expect(tester.injector()).to.equal($injector);
@@ -41,27 +40,28 @@ describe('ngMidwayTester', function() {
 
   describe('template options', function() {
     it('should use a custom index.html template string', function(done) {
-      var example = angular.module(appName, ['ngRoute'])
-        .run(function($rootScope) {
-          $rootScope.value = 'true';
-        })
-        .config(function($routeProvider) {
-          $routeProvider.when('/path2', {
-            controller: function($scope) {
-              $scope.page = 'two';
-            },
-            template : 'two'
-          });
-        });
+      var example = angular.module(appName, ['ui.router'])
+            .run(function($rootScope) {
+              $rootScope.value = 'true';
+            })
+            .config(function($urlRouterProvider) {
+              $urlRouterProvider.when('/path2', [{
+                controller: function($scope) {
+                  $scope.page = 'two';
+                },
+                template : 'two'
+              }]);
+            });
 
       tester = ngMidwayTester(appName, {
         template : '<h1>title</h1>' +
-                   '<div ng-view></div>'
+          '<div ui-view></div>'
       });
       expect(tester.module()).to.equal(example);
       expect(tester.rootScope().value).to.equal('true');
 
       tester.visit('/path2', function() {
+        debugger;
         expect(tester.path()).to.equal('/path2');
         expect(tester.viewElement().text()).to.contain('two');
         done();
@@ -69,18 +69,18 @@ describe('ngMidwayTester', function() {
     });
 
     it('should use a custom index.html template file', function(done) {
-      var example = angular.module(appName, ['ngRoute'])
-        .run(function($rootScope) {
-          $rootScope.value = 'true';
-        })
-        .config(function($routeProvider) {
-          $routeProvider.when('/path-10', {
-            controller: function($scope) {
-              $scope.page = 'ten';
-            },
-            template : 'ten'
-          });
-        });
+      var example = angular.module(appName, ['ui.router'])
+            .run(function($rootScope) {
+              $rootScope.value = 'true';
+            })
+            .config(function($urlRouterProvider) {
+              $urlRouterProvider.when('/path-10', [{
+                controller: function($scope) {
+                  $scope.page = 'ten';
+                },
+                template : 'ten'
+              }]);
+            });
 
       tester = ngMidwayTester(appName, {
         templateUrl : './test/spec/custom-view.html'
@@ -99,18 +99,18 @@ describe('ngMidwayTester', function() {
     });
 
     it('should throw an error when a file downloaded from templateUrl is not found', function() {
-      var example = angular.module(appName, ['ngRoute'])
-        .run(function($rootScope) {
-          $rootScope.value = 'true';
-        })
-        .config(function($routeProvider) {
-          $routeProvider.when('/path-10', {
-            controller: function($scope) {
-              $scope.page = 'ten';
-            },
-            template : 'ten'
-          });
-        });
+      var example = angular.module(appName, ['ui.router'])
+            .run(function($rootScope) {
+              $rootScope.value = 'true';
+            })
+            .config(function($urlRouterProvider) {
+              $urlRouterProvider.when('/path-10', {
+                controller: function($scope) {
+                  $scope.page = 'ten';
+                },
+                template : 'ten'
+              });
+            });
 
       var fn = function() {
         tester = ngMidwayTester(appName, {
@@ -125,9 +125,9 @@ describe('ngMidwayTester', function() {
   describe('scope', function() {
     it('should perform an eval async operation', function() {
       var example = angular.module(appName, [])
-        .run(function($rootScope) {
-          $rootScope.value = 1;
-        });
+            .run(function($rootScope) {
+              $rootScope.value = 1;
+            });
 
       tester = ngMidwayTester(appName);
       tester.evalAsync(function() {
@@ -141,9 +141,9 @@ describe('ngMidwayTester', function() {
 
     it('should compile and link html code', function() {
       var example = angular.module(appName, [])
-        .run(function($rootScope) {
-          $rootScope.value = 'one';
-        });
+            .run(function($rootScope) {
+              $rootScope.value = 'one';
+            });
 
       tester = ngMidwayTester(appName);
       var element = tester.compile('<div>{{ value }}</div>');
@@ -155,10 +155,10 @@ describe('ngMidwayTester', function() {
 
   describe('routing', function() {
     it('should change the path', function(done) {
-      var example = angular.module(appName, ['ngRoute'])
-        .run(function($rootScope) {
-          $rootScope.value = 'true';
-        });
+      var example = angular.module(appName, ['ui.router'])
+            .run(function($rootScope) {
+              $rootScope.value = 'true';
+            });
 
       tester = ngMidwayTester(appName, true);
       tester.visit('/', function() {
@@ -168,21 +168,21 @@ describe('ngMidwayTester', function() {
     });
 
     it('should update the when by the time the callback is called', function(done) {
-      var example = angular.module(appName, ['ngRoute'])
-        .config(function($routeProvider) {
-          $routeProvider.when('/path', {
-            controller: function($scope) {
-              $scope.page = 'one';
-            },
-            template : '...'
-          });
-          $routeProvider.when('/path2', {
-            controller: function($scope) {
-              $scope.page = 'two';
-            },
-            template : '==='
-          });
-        });
+      var example = angular.module(appName, ['ui.router'])
+            .config(function($urlRouterProvider) {
+              $urlRouterProvider.when('/path', [{
+                controller: function($scope) {
+                  $scope.page = 'one';
+                },
+                template : '...'
+              }]);
+              $urlRouterProvider.when('/path2', [{
+                controller: function($scope) {
+                  $scope.page = 'two';
+                },
+                template : '==='
+              }]);
+            });
 
       tester = ngMidwayTester(appName, true);
       tester.attach();

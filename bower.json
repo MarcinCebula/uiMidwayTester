@@ -2,7 +2,6 @@
   "name": "ngMidwayTester",
   "devDependencies": {
     "angular": "1.2.15",
-    "angular-ui-router": "latest",
-    "angular-route": "latest"
+    "angular-ui-router": "latest"
   }
 }

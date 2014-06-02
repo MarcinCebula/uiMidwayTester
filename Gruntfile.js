@@ -57,11 +57,11 @@ module.exports = function(grunt) {
       test: {
         configFile: './karma.conf.js',
         autoWatch: false,
-        singleRun: true
+        singleRun: false
       },
       auto: {
         configFile: './karma.conf.js',
-        autoWatch: true,
+        autoWatch: false,
         singleRun: false
       },
       ci: {
@@ -88,6 +88,7 @@ module.exports = function(grunt) {
 
   //single run tests
   grunt.registerTask('test', ['connect:test','karma:test']);
+  grunt.registerTask('auto', ['connect:test','karma:test:auto']);
   grunt.registerTask('travis', ['connect:test','karma:ci']);
   grunt.registerTask('autotest', ['connect:test','karma:auto']);
   grunt.registerTask('coverage', ['install','connect:test','karma:coverage','open:coverage','connect:coverage']);
